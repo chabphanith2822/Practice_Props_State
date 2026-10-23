@@ -1,11 +1,13 @@
 "use client";
 
-import { useState } from "react";
 import { ProductType } from "@/lib/products";
 
-export default function ProductCardComponent(props: ProductType) {
-  const [qty, setQty] = useState(0);
+type CardProps = ProductType & {
+  qty: number;
+  onAdd: () => void;
+};
 
+export default function ProductCardComponent({ qty, onAdd, ...props }: CardProps) {
   return (
     <article className="flex w-full items-center justify-between gap-4 rounded-2xl border border-gray-200 bg-white p-4 shadow-sm transition hover:shadow-md">
       <div className="flex min-w-0 flex-1 flex-col gap-1">
@@ -41,7 +43,7 @@ export default function ProductCardComponent(props: ProductType) {
         />
 
         <button
-          onClick={() => setQty((q) => q + 1)}
+          onClick={onAdd}
           aria-label="បន្ថែមទៅកន្ត្រក"
           className="absolute -bottom-2 -right-2 flex h-9 w-9 items-center justify-center rounded-full bg-white text-2xl leading-none text-gray-800 shadow-md ring-1 ring-gray-200 transition hover:bg-gray-100 active:scale-90"
         >
